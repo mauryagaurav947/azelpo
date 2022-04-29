@@ -42,7 +42,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODO: Specify your own uniq
+        //  ue Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.azelpo.azelpo"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion

@@ -69,4 +69,5 @@ class Palette {
 
   //
   static const Color redColor = Color(0xFFfe1846);
+  static const Color backGroundColor = Color(0xFFf3f3f3);
 }
