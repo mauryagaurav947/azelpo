@@ -23,9 +23,7 @@ class _ServiceCategoryPageState extends State<ServiceCategoryPage> {
           ),
         ),
         leading: InkWell(
-          onTap: (){
-            Navigate.mayClose();
-          },
+          onTap: (){},
             child: const Icon(Icons.keyboard_arrow_left_rounded)),
       ),
       body:ListView(
