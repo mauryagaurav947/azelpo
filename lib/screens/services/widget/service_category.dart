@@ -1,5 +1,6 @@
 import 'package:azelpo/config/router/router.dart';
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/screens/services/widget/view_page.dart';
 import 'package:azelpo/screens/widgets/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,66 +61,72 @@ class _ServiceCategoryPageState extends State<ServiceCategoryPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 0,
-          ),
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      data[index]["image"]!,
-                      fit: BoxFit.cover,
-                      width: 160.w,
-                    ),
-                  ),
-                ),
-                const Gap(15),
-                Text(
-                  data[index]["title"]!,
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                SizedBox(height: 10.h,),
-                Row(
+        GestureDetector(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ViewPage()));
+          },
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 0,
+            ),
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ViewPage()));
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("\$200.00",
-                      style: TextStyle(color: Palette.blackColor.shade400,
-                        decoration: TextDecoration.lineThrough,
-                        fontSize: 10.sp,
-                      ),),
-                    SizedBox(
-                        width: 5.h,),
-                    Text(
-                      data[index]["price"]!,
-                      style: Theme.of(context).textTheme.headline5!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color:Palette.greenColor
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          data[index]["image"]!,
+                          fit: BoxFit.cover,
+                          width: 160.w,
+                        ),
                       ),
                     ),
+                    const Gap(15),
+                    Text(
+                      data[index]["title"]!,
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    SizedBox(height: 10.h,),
+                    Row(
+                      children: [
+                        Text("\$200.00",
+                          style: TextStyle(color: Palette.blackColor.shade400,
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: 10.sp,
+                          ),),
+                        SizedBox(
+                            width: 5.w,),
+                        Text(
+                          data[index]["price"]!,
+                          style: Theme.of(context).textTheme.headline5!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color:Palette.greenColor
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(10)
                   ],
                 ),
-                const Gap(10)
-              ],
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     );
-
   }
-
-
-
 }

@@ -1,4 +1,5 @@
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/screens/auth/signup/signup_page.dart';
 import 'package:azelpo/screens/widgets/my_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +24,9 @@ class _MorePageState extends State<MorePage> {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 30.h),
         children: [
           ListTile(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpPage()));
+            },
             leading: SvgPicture.asset(
               "assets/images/bag-handle.svg",
               height: 30.h,
@@ -33,7 +37,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
           Divider(
             color: Palette.blackColor.shade400,
@@ -48,7 +52,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
           Divider(
             color: Palette.blackColor.shade400,
@@ -64,7 +68,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
           Divider(
             color: Palette.blackColor.shade400,
@@ -80,7 +84,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
           Divider(
             color: Palette.blackColor.shade400,
@@ -96,7 +100,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
           Divider(
             color: Palette.blackColor.shade400,
@@ -112,7 +116,7 @@ class _MorePageState extends State<MorePage> {
                 style: Theme.of(context).textTheme.headline5!.copyWith(
                       color: Palette.blackColor.shade700,
                     )),
-            trailing: Icon(Icons.keyboard_arrow_right_outlined),
+            trailing: const Icon(Icons.keyboard_arrow_right_outlined),
           ),
         ],
       ),
