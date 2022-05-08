@@ -38,8 +38,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "First Name",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -51,8 +55,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Last Name",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -64,8 +72,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Email",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -77,8 +89,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Phone Number",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -90,8 +106,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Password",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -129,10 +149,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Palette.blackColor.shade700,
                           fontWeight: FontWeight.w100)),
                   TextSpan(
-                    recognizer: TapGestureRecognizer()..onTap=(){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const LoginPage()));
-                    },
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const LoginPage()));
+                        },
                       text: " Login Here",
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                           color: Palette.primaryColor,

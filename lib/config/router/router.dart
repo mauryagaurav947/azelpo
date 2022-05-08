@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:azelpo/app.dart';
 import 'package:azelpo/constants/routes.dart';
+import 'package:azelpo/screens/services/widget/product_detail_page.dart';
+import 'package:azelpo/screens/splash_screen/splash_screen.dart';
 import 'package:azelpo/screens/widgets/setup_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,5 +47,7 @@ class Navigate {
   /// Registering or adding all of `Routes` used all over the application
   static Map<String, WidgetBuilder> get routes => {
         Routes.home: (_) => const SetupFlow(),
+        Routes.productDetail: (_) => const ProductDetailPage(),
+        Routes.splashScreen: (_) => const SplashScreenPage(),
       };
 }

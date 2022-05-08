@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             );
           },
           routes: Navigate.routes,
-          initialRoute: Routes.home,
+          initialRoute: Routes.splashScreen,
         );
       },
     );

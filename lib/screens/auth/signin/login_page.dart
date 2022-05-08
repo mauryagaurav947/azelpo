@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -36,17 +37,23 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Text("Please sign in to continue",style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(color: Palette.blackColor.shade700,fontWeight: FontWeight.w100),),
+                Text(
+                  "Please sign in to continue",
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                      color: Palette.blackColor.shade700,
+                      fontWeight: FontWeight.w100),
+                ),
                 SizedBox(
                   height: 30.h,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Your Email",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -58,8 +65,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Palette.borderColor.withOpacity(0.9))),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Palette.borderColor.withOpacity(0.9))),
                       hintText: "Password",
                       hintStyle: Theme.of(context)
                           .textTheme
@@ -71,11 +82,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Forgot Password?",
-                    style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: Palette.blackColor.shade700,fontWeight: FontWeight.w100),),
+                  child: Text(
+                    "Forgot Password?",
+                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                        color: Palette.blackColor.shade700,
+                        fontWeight: FontWeight.w100),
+                  ),
                 ),
                 SizedBox(
                   height: 20.h,
@@ -103,23 +115,23 @@ class _LoginPageState extends State<LoginPage> {
                 Align(
                   alignment: Alignment.center,
                   child: RichText(
-                      text: TextSpan(
-                      children: [
-                        TextSpan(text: "New Member? ",style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: Palette.blackColor.shade700,fontWeight: FontWeight.w100)),
-                        TextSpan(
-                          recognizer: TapGestureRecognizer()..onTap=(){
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const SignUpPage()));
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: "New Member? ",
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                            color: Palette.blackColor.shade700,
+                            fontWeight: FontWeight.w100)),
+                    TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const SignUpPage()));
                           },
-                            text: " Register Now",style:  Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: Palette.primaryColor,fontWeight: FontWeight.w600))
-                      ]
-                  )),
+                        text: " Register Now",
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                            color: Palette.primaryColor,
+                            fontWeight: FontWeight.w600))
+                  ])),
                 )
               ],
             ),
