@@ -1,16 +1,31 @@
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/models/service_category_model.dart';
+import 'package:azelpo/models/service_provider_model.dart';
 import 'package:azelpo/screens/widgets/gap.dart';
+import 'package:azelpo/utils/service/rest_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, this.category}) : super(key: key);
+   final category;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late List<ServiceProviderModel> _serviceProvider = [];
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getServiceSubCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const Gap(5),
                     Text(
-                      "Happy Hogan",
+                ("${_serviceProvider[index].firstName} ${_serviceProvider[index].lastName}"),
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.normal,
                           ),
@@ -230,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 );
               },
-              itemCount: 10,
+              itemCount: _serviceProvider.length,
             ),
           )
         ],
@@ -355,7 +370,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             child: Text(
-              "Featured Service Providers",
+              "Latest Service Providers",
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
@@ -368,7 +383,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisSpacing: 10.w,
               mainAxisSpacing: 5.h,
             ),
-            itemCount: 10,
+            itemCount: _serviceProvider.length,
             itemBuilder: (context, index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -384,14 +399,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Gap(5),
                   Text(
-                    "Happy Hogan",
+              ("${_serviceProvider[index].firstName} ${_serviceProvider[index].lastName}"),
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           fontWeight: FontWeight.normal,
                         ),
                   ),
                   const Gap(4),
                   Text(
-                    "Featured",
+                    "Verified",
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Palette.greenColor,
                           fontWeight: FontWeight.normal,
@@ -422,4 +437,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  void _getServiceSubCategory() async {
+    final response = await Services.getServiceProvider();
+    if (response.statusCode == 200) {
+      _serviceProvider = response.data!;
+      setState(() {});
+    }
+  }
+
 }

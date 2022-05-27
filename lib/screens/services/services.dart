@@ -1,8 +1,9 @@
-import 'package:azelpo/config/router/router.dart';
-import 'package:azelpo/constants/app_constants.dart';
+import 'package:azelpo/constants/api_path.dart';
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/models/service_category_model.dart';
 import 'package:azelpo/screens/services/widget/service_category.dart';
 import 'package:azelpo/screens/widgets/gap.dart';
+import 'package:azelpo/utils/service/rest_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,16 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
+
+  late List<ServiceCategoriesModel> _serviceCategory = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getServiceCategory();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +68,6 @@ class _ServicesPageState extends State<ServicesPage> {
 
   ///GridView Item List
   Widget _category() {
-    final data = [
-      {"title": "Cleaning and Help", "image": "assets/images/category/1.png"},
-      {"title": "Delivery Services", "image": "assets/images/category/2.png"},
-      {"title": "Event Management", "image": "assets/images/category/3.png"},
-      {"title": "Therapists and Trainers", "image": "assets/images/category/4.png"},
-      {"title": "Home", "image": "assets/images/category/5.png"},
-      {"title": "Home", "image": "assets/images/category/6.png"},
-    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,10 +79,10 @@ class _ServicesPageState extends State<ServicesPage> {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 10.w),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount:2
             ),
-            itemCount: data.length,
+            itemCount: _serviceCategory.length,
             itemBuilder: (context, index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,8 +90,8 @@ class _ServicesPageState extends State<ServicesPage> {
                   Expanded(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        data[index]["image"]!,
+                      child: Image.network(
+                        Urls.imagePath("${_serviceCategory[index].cover}"),
                         fit: BoxFit.cover,
                         width: 160.w,
                       ),
@@ -96,7 +99,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   ),
                   const Gap(15),
                   Text(
-                    data[index]["title"]!,
+                    "${_serviceCategory[index].name}",
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                       fontWeight: FontWeight.normal,
                     ),
@@ -109,7 +112,6 @@ class _ServicesPageState extends State<ServicesPage> {
         ),
       ],
     );
-
   }
 
 
@@ -127,7 +129,7 @@ class _ServicesPageState extends State<ServicesPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "902 W. Pinekoll Drive Winter Garden, FL 394331",
+            "902 W.Pinekoll Drive Winter Garden, FL 394331",
             style: TextStyle(
               color: Colors.white,
             ),
@@ -162,5 +164,15 @@ class _ServicesPageState extends State<ServicesPage> {
         ],
       ),
     );
+  }
+
+
+  //Api Response
+  void _getServiceCategory() async {
+    final response = await Services.serviceCategory();
+    if (response.statusCode == 200) {
+      _serviceCategory = response.data!;
+      setState(() {});
+    }
   }
 }
