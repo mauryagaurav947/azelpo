@@ -10,6 +10,10 @@ class Routes {
   /// Route name for ProductDetail
   static const String productDetail = "productDetail";
 
+  ///Login Page
+  static const String login = "login";
+
   /// Route name for PageNotFound
   static const String unknownRoute = "unknownRoute";
+
 }

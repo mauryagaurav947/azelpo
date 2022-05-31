@@ -1,8 +1,14 @@
+import 'package:azelpo/config/router/router.dart';
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/constants/routes.dart';
 import 'package:azelpo/screens/auth/signin/login_page.dart';
+import 'package:azelpo/utils/service/rest_api.dart';
+import 'package:azelpo/utils/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../utils/validator.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -12,6 +18,24 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  late TextEditingController _firstName;
+  late TextEditingController _lastName;
+  late TextEditingController _email;
+  late TextEditingController _phoneNumber;
+  late TextEditingController _password;
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _firstName = TextEditingController();
+    _lastName = TextEditingController();
+    _email = TextEditingController();
+    _phoneNumber = TextEditingController();
+    _password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 30.h,
                 ),
                 TextFormField(
+                  controller: _firstName,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -54,6 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20.h,
                 ),
                 TextFormField(
+                  controller: _lastName,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -71,6 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20.h,
                 ),
                 TextFormField(
+                  controller: _email,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -88,6 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20.h,
                 ),
                 TextFormField(
+                  controller: _phoneNumber,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -105,6 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20.h,
                 ),
                 TextFormField(
+                  controller: _password,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -128,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   margin: EdgeInsets.symmetric(vertical: 10.h),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => _signUp(),
                     child: Text(
                       "Register",
                       style: Theme.of(context)
@@ -165,5 +194,70 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+  Future<void> _signUp() async {
+    if (!_validate()) return;
+
+    Utils.unFocus(context);
+    final payload = {
+      'first_name': _firstName.text,
+      'last_name': _lastName.text,
+      'email': _email.text,
+      'mobile': _phoneNumber.text,
+      'password': _password.text,
+    };
+    final response = await Services.signUp(payload);
+    Utils.showToast(response.message);
+    if (response.statusCode == 200) {
+     // Navigate.pushNamed(Routes.login);
+    }
+  }
+
+  bool _validate() {
+    if (_firstName.text.isEmpty ||
+        _lastName.text.isEmpty ||
+        _email.text.isEmpty ||
+        _phoneNumber.text.isEmpty ||
+        _password.text.isEmpty) {
+      Utils.showToast('Fields with (*) sign are required');
+      return false;
+    }
+
+    if (!Validator.validateTextWithSpace(_firstName.text)) {
+      Utils.showToast('Name must not contain any special character');
+      //_fullNameFN.requestFocus();
+      return false;
+    }
+
+    if (!Validator.validateTextWithSpace(_lastName.text)) {
+      Utils.showToast('Name must not contain any special character');
+      //_fullNameFN.requestFocus();
+      return false;
+    }
+
+    if (!Validator.validateEmail(_email.text)) {
+      Utils.showToast('Invalid E-mail');
+      //_emailFN.requestFocus();
+      return false;
+    }
+
+    if (!Validator.validateMobile(_phoneNumber.text)) {
+      Utils.showToast('Invalid mobile');
+      //_mobileFN.requestFocus();
+      return false;
+    }
+
+    if (_password.text.isEmpty) {
+      Utils.showToast('Please enter password');
+      //_passwordFN.requestFocus();
+      return false;
+    }
+
+    if (!Validator.validatePassword(_password.text)) {
+      Utils.showToast('Password must be in between 8 - 15 char');
+      //_passwordFN.requestFocus();
+      return false;
+    }
+    return true;
   }
 }

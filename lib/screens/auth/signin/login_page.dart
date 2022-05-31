@@ -1,9 +1,16 @@
+import 'package:azelpo/constants/app_constants.dart';
 import 'package:azelpo/constants/palette.dart';
+import 'package:azelpo/constants/routes.dart';
 import 'package:azelpo/screens/auth/signup/signup_page.dart';
+import 'package:azelpo/screens/home/home.dart';
+import 'package:azelpo/utils/service/rest_api.dart';
+import 'package:azelpo/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../config/router/router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +20,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  late TextEditingController _email;
+  late TextEditingController _password;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _email = TextEditingController();
+    _password = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 30.h,
                 ),
                 TextFormField(
+                  controller: _email,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -64,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20.h,
                 ),
                 TextFormField(
+                  controller: _password,
                   decoration: InputDecoration(
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -99,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   margin: EdgeInsets.symmetric(vertical: 10.h),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => _signIn(),
                     child: Text(
                       "Log In",
                       style: Theme.of(context)
@@ -140,4 +162,29 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  Future<void> _signIn() async {
+    if (_email.text.isNotEmpty && _password.text.isNotEmpty) {
+      // unfocus keyboard
+      Utils.unFocus(context);
+
+      // payload for sign_in api
+      Map<String, dynamic> payload = {
+        'email': _email.text,
+        'password': _password.text,
+      };
+
+      final response = await Services.signIn(payload);
+      if (response.statusCode == 200) {
+        // await kSharedPreferences.setString(
+        //     PrefConst.userToken, response.data['token']);
+        // await kUserProvider.sync();
+        Navigate.pushNamed(Routes.home);
+      }
+      Utils.showToast(response.message);
+    } else {
+      Utils.showToast("Please enter username and password");
+    }
+  }
+
 }

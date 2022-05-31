@@ -23,7 +23,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       ..play();
     controller.addListener(() {
       if (!controller.value.isPlaying) {
-        Navigate.pushNamed(Routes.home);
+        Navigate.replaceNamed(Routes.login);
       }
     });
   }
