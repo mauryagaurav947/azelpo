@@ -1,6 +1,5 @@
 import 'package:azelpo/config/router/router.dart';
 import 'package:azelpo/constants/routes.dart';
-import 'package:azelpo/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 

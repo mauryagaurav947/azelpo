@@ -3,7 +3,6 @@ import 'package:azelpo/config/theme/theme.dart';
 import 'package:azelpo/constants/app_constants.dart';
 import 'package:azelpo/constants/routes.dart';
 import 'package:azelpo/providers/base_scaffold_provider.dart';
-import 'package:azelpo/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
