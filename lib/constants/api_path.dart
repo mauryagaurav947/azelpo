@@ -5,6 +5,12 @@ class Urls {
   // Image url
   static String imagePath(String imagePath) => "http://$baseUrl/$imagePath";
 
+  //Sign In url
+  static const String  signIn = "/api/login";
+
+  //Sign up url
+  static const String  signUp = "/api/register";
+
   //Service Category url
   static const String  serviceCategory = "/api/service-categories";
 

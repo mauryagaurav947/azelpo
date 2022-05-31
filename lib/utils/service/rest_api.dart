@@ -14,6 +14,41 @@ class Services {
         HttpHeaders.acceptHeader: 'application/json',
       };
 
+
+  //sign in api
+  static Future<Data> signIn(Map<String,dynamic>body) async {
+    Uri url = Uri.http(Urls.baseUrl, Urls.signIn);
+    try {
+      final response = await http.post(url, headers: _restApiHeader,body: body);
+      final jsonResponse = jsonDecode(response.body);
+      if(response.statusCode == 200)
+      {
+        return Data.fromResponse(jsonResponse);
+      }
+      return Data.fromResponse(jsonResponse);
+      } catch (_) {
+      return Data.fromException(_);
+    }
+  }
+
+
+  //signUp Api
+  static Future<Data> signUp(Map<String,dynamic>body) async {
+    Uri url = Uri.http(Urls.baseUrl, Urls.signUp);
+    try {
+      final response = await http.post(url, headers: _restApiHeader,body: body);
+      final jsonResponse = jsonDecode(response.body);
+      if(response.statusCode == 200)
+      {
+        return Data.fromResponse(jsonResponse);
+      }
+      return Data.fromResponse(jsonResponse);
+      } catch (_) {
+      return Data.fromException(_);
+    }
+  }
+
+
   // Service Category Api
   static Future<Data<List<ServiceCategoriesModel>>> serviceCategory() async {
     Uri url = Uri.http(Urls.baseUrl, Urls.serviceCategory);

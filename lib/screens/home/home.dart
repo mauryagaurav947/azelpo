@@ -1,3 +1,5 @@
+import 'package:azelpo/config/router/router.dart';
+import 'package:azelpo/constants/api_path.dart';
 import 'package:azelpo/constants/palette.dart';
 import 'package:azelpo/models/service_category_model.dart';
 import 'package:azelpo/models/service_provider_model.dart';
@@ -5,6 +7,8 @@ import 'package:azelpo/screens/widgets/gap.dart';
 import 'package:azelpo/utils/service/rest_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../services/widget/service_category.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.category}) : super(key: key);
@@ -17,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   late List<ServiceProviderModel> _serviceProvider = [];
+  late List<ServiceCategoriesModel> _serviceCategory = [];
 
 
   @override
@@ -136,14 +141,6 @@ class _HomePageState extends State<HomePage> {
 
   /// Category
   Widget _category() {
-    final data = [
-      {"title": "Home", "image": "assets/images/category/1.png"},
-      {"title": "Home", "image": "assets/images/category/2.png"},
-      {"title": "Home", "image": "assets/images/category/3.png"},
-      {"title": "Home", "image": "assets/images/category/4.png"},
-      {"title": "Home", "image": "assets/images/category/5.png"},
-      {"title": "Home", "image": "assets/images/category/6.png"},
-    ];
     return Container(
       height: 95.h,
       width: 1.sw,
@@ -154,23 +151,32 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         separatorBuilder: (_, __) => SizedBox(width: 20.w),
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    data[index]["image"]!,
-                    fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ServiceCategoryPage()));
+            },
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child:  Image.network(
+                      Urls.imagePath("${_serviceCategory[index].cover}"),
+                      fit: BoxFit.cover,
+                      width: 50.w,
+                      //height: 160.h,
+                    ),
                   ),
                 ),
-              ),
-              const Gap(10),
-              Text(data[index]["title"]!),
-            ],
+                const Gap(10),
+                Expanded(
+                    child: Text(_serviceCategory[index].name!)),
+              ],
+            ),
           );
         },
-        itemCount: data.length,
+        itemCount: _serviceCategory.length,
       ),
     );
   }
@@ -442,8 +448,12 @@ class _HomePageState extends State<HomePage> {
     final response = await Services.getServiceProvider();
     if (response.statusCode == 200) {
       _serviceProvider = response.data!;
-      setState(() {});
     }
+    final serviceresponse = await Services.serviceCategory();
+    if (serviceresponse.statusCode == 200) {
+      _serviceCategory = serviceresponse.data!;
+    }
+    setState(() {});
   }
 
 }

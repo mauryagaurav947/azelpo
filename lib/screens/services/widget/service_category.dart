@@ -29,7 +29,6 @@ class _ServiceCategoryPageState extends State<ServiceCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_serviceSubCategory);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -112,32 +111,32 @@ class _ServiceCategoryPageState extends State<ServiceCategoryPage> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "\$${_serviceSubCategory[index].slug}",
-                        style: TextStyle(
-                          color: Palette.blackColor.shade400,
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 10.sp,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Text(
-                        ("${_serviceSubCategory[index].name}"),
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Palette.greenColor),
-                      ),
-                    ],
-                  ),
-                  const Gap(10)
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       "\$${_serviceSubCategory[index].slug}",
+                  //       style: TextStyle(
+                  //         color: Palette.blackColor.shade400,
+                  //         decoration: TextDecoration.lineThrough,
+                  //         fontSize: 10.sp,
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 5.w,
+                  //     ),
+                  //     Text(
+                  //       ("${_serviceSubCategory[index].name}"),
+                  //       style: Theme
+                  //           .of(context)
+                  //           .textTheme
+                  //           .headline5!
+                  //           .copyWith(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Palette.greenColor),
+                  //     ),
+                  //   ],
+                  // ),
+                  //const Gap(10)
                 ],
               ),
             );
