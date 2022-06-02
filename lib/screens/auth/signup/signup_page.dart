@@ -39,16 +39,16 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            padding: EdgeInsets.only(left: 20.w, top: 60.h, right: 20.w),
-            height: 1.sh,
-            width: 1.sw,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/login-bg.jpg"),
-                    fit: BoxFit.fill)),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.only(left: 20.w, top: 60.h, right: 20.w),
+          height: 1.sh,
+          width: 1.sw,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/login-bg.jpg"),
+                  fit: BoxFit.fill)),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -208,6 +208,7 @@ class _SignUpPageState extends State<SignUpPage> {
     };
     final response = await Services.signUp(payload);
     Utils.showToast(response.message);
+    print(response.message);
     if (response.statusCode == 200) {
      // Navigate.pushNamed(Routes.login);
     }

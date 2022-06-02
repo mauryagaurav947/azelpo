@@ -19,7 +19,7 @@ class Services {
   static Future<Data> signIn(Map<String,dynamic>body) async {
     Uri url = Uri.http(Urls.baseUrl, Urls.signIn);
     try {
-      final response = await http.post(url, headers: _restApiHeader,body: body);
+      final response = await http.post(url, headers: _restApiHeader,body: jsonEncode(body));
       final jsonResponse = jsonDecode(response.body);
       if(response.statusCode == 200)
       {
@@ -36,7 +36,7 @@ class Services {
   static Future<Data> signUp(Map<String,dynamic>body) async {
     Uri url = Uri.http(Urls.baseUrl, Urls.signUp);
     try {
-      final response = await http.post(url, headers: _restApiHeader,body: body);
+      final response = await http.post(url, headers: _restApiHeader,body: jsonEncode(body));
       final jsonResponse = jsonDecode(response.body);
       if(response.statusCode == 200)
       {
