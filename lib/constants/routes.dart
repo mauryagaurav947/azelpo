@@ -13,6 +13,9 @@ class Routes {
   ///Login Page
   static const String login = "login";
 
+  ///Login Page
+  static const String signUp = "signUp";
+
   /// Route name for PageNotFound
   static const String unknownRoute = "unknownRoute";
 

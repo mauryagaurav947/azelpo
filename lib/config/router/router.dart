@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:azelpo/app.dart';
 import 'package:azelpo/constants/routes.dart';
 import 'package:azelpo/screens/auth/signin/login_page.dart';
+import 'package:azelpo/screens/auth/signup/signup_page.dart';
 import 'package:azelpo/screens/services/widget/product_detail_page.dart';
 import 'package:azelpo/screens/splash_screen/splash_screen.dart';
 import 'package:azelpo/screens/widgets/setup_flow.dart';
@@ -51,5 +52,6 @@ class Navigate {
         Routes.productDetail: (_) => const ProductDetailPage(),
         Routes.splashScreen: (_) => const SplashScreenPage(),
         Routes.login: (_) => const LoginPage(),
+        Routes.signUp: (_) => const SignUpPage(),
       };
 }
